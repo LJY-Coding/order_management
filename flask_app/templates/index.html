@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/scripts.js" defer></script>
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Sharp" rel="stylesheet">
     <!-- Bootstrap style sheet -->
@@ -29,7 +30,7 @@
                     <span class="material-icons-sharp">dashboard</span>
                     <h3>仪表盘</h3>
                 </a>
-                <a href="#" class="active">
+                <a href="#" class="active" id="menu2">
                     <span class="material-icons-sharp">group</span>
                     <h3>客户管理</h3>
                 </a>
@@ -51,6 +52,241 @@
                 </a>
             </div>
         </aside>
+
+        <!---------------End Of Aside----------------------- -->
+        <main>
+            <h1>订单信息总览</h1>
+
+            <div class="date">
+                <input type="date">
+            </div>
+
+            <div class="insights">
+                <div class="sales">
+                    <span class="material-icons-sharp">analytics</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>总销售额</h3>
+                            <h1>￥3,840,000</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="number">
+                                <p>81%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">最近24小时内</small>
+                </div>
+                <!-----------End Of Sales-------------------->
+                <div class="orders">
+                    <span class="material-icons-sharp">bar_chart</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>总订单量</h3>
+                            <h1>12,345份</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="number">
+                                <p>50%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">最近24小时内</small>
+                </div>
+                <!-----------End Of Orders-------------------->
+                <div class="revenue">
+                    <span class="material-icons-sharp">stacked_line_chart</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>总利润</h3>
+                            <h1>￥1,460,000</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="number">
+                                <p>34%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">最近24小时内</small>
+                </div>
+                <!-----------End Of Revenue-------------------->
+            </div>
+            <!-----------------End Of Insights ----------------------->
+
+
+            <div class="recent-orders">
+                <h2>最新订单信息</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>订单号</th>
+                            <th>套餐组</th>
+                            <th>订单日期</th>
+                            <th>订单量</th>
+                            <th>订单额</th>
+                            <th>订单状态</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1231546</td>
+                            <td>孕妇餐</td>
+                            <td>02/01/2023</td>
+                            <td>1</td>
+                            <td>￥430</td>
+                            <td class="success">已完成</td>
+                            <td class="primary">详情</td>
+                        </tr>
+                        <tr>
+                            <td>1231547</td>
+                            <td>女皇餐</td>
+                            <td>02/05/2023</td>
+                            <td>1</td>
+                            <td>￥750</td>
+                            <td class="warning">进行中</td>
+                            <td class="primary">详情</td>
+                        </tr>
+                        <tr>
+                            <td>1231548</td>
+                            <td>儿童餐</td>
+                            <td>02/11/2023</td>
+                            <td>1</td>
+                            <td>￥560</td>
+                            <td class="danger">未完成</td>
+                            <td class="primary">详情</td>
+                        </tr>
+                        <tr>
+                            <td>1231549</td>
+                            <td>孕妇餐</td>
+                            <td>01/01/2023</td>
+                            <td>1</td>
+                            <td>￥430</td>
+                            <td class="success">已完成</td>
+                            <td class="primary">详情</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="#">Show All</a>
+            </div>
+        </main>
+        <!------------------End Of Main ------------------->
+
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-icons-sharp active">light_mode</span>
+                    <span class="material-icons-sharp">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        <p>Hey, <b>Jacob</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="/img/profile-1.jpg">
+                    </div>
+                </div>
+            </div>
+            <!-- ---End Of Top --- -->
+            
+            <div class="recent-updates">
+                <h2>最近更新</h2>
+                <div class="updates">
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="/img/profile-2.jpg" alt="">
+                        </div>
+                        <!-- Python 修改 -->
+                        <div class="message">
+                            <p><b>Tony</b> 录入一份孕妇餐</p> 
+                            <small class="text-muted">2分钟前</small>
+                        </div>
+                    </div>
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="/img/profile-1.jpg" alt="">
+                        </div>
+                        <!-- Python 修改 -->
+                        <div class="message">
+                            <p><b>Jacob</b> 录入一份女皇餐</p> 
+                            <small class="text-muted">10分钟前</small>
+                        </div>
+                    </div>
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="/img/profile-2.jpg" alt="">
+                        </div>
+                        <!-- Python 修改 -->
+                        <div class="message">
+                            <p><b>Tony</b> 录入一份儿童餐</p> 
+                            <small class="text-muted">1小时前</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!------------------ End Of Recent Updates  ---------------------->
+            <div class="sales-analytics">
+                <h2>销售分析</h2>
+                <div class="item online">
+                    <div class="icon">
+                        <span class="material-icons-sharp">shopping_cart</span>
+                    </div>
+                    <div class="right">
+                        <div class="info">
+                            <h3>线上订单</h3>
+                            <small class="text-muted">最近24小时内</small>
+                        </div>
+                        <h5 class="success">+39%</h5>
+                        <h3>3849</h3>
+                    </div>
+                </div>
+                <div class="item offline">
+                    <div class="icon">
+                        <span class="material-icons-sharp">local_mall</span>
+                    </div>
+                    <div class="right">
+                        <div class="info">
+                            <h3>线下订单</h3>
+                            <small class="text-muted">最近24小时内</small>
+                        </div>
+                        <h5 class="danger">-5%</h5>
+                        <h3>1200</h3>
+                    </div>
+                </div>
+                <div class="item customers">
+                    <div class="icon">
+                        <span class="material-icons-sharp">person</span>
+                    </div>
+                    <div class="right">
+                        <div class="info">
+                            <h3>新增客户</h3>
+                            <small class="text-muted">最近24小时内</small>
+                        </div>
+                        <h5 class="success">+12%</h5>
+                        <h3>946</h3>
+                    </div>
+                </div>
+                <div class="item add-product">
+                    <div>
+                        <span class="material-icons-sharp">add</span>
+                        <h3>添加订单</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
