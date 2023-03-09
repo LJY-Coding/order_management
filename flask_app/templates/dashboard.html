@@ -1,0 +1,132 @@
+<!-- dashboard.html -->
+{% extends 'index.html' %}
+
+{% block title %}订单信息总览{% endblock %}
+
+{% block content %}
+<h1>订单信息总览</h1>
+
+<div class="date">
+    <input type="date">
+</div>
+
+<div class="insights">
+    <div class="sales">
+        <span class="material-icons-sharp">analytics</span>
+        <div class="middle">
+            <div class="left">
+                <h3>总销售额</h3>
+                <h1>￥3,840,000</h1>
+            </div>
+            <div class="progress">
+                <svg>
+                    <circle cx="38" cy="38" r="36"></circle>
+                </svg>
+                <div class="number">
+                    <p>81%</p>
+                </div>
+            </div>
+        </div>
+        <small class="text-muted">最近24小时内</small>
+    </div>
+    <!-----------End Of Sales-------------------->
+    <div class="orders">
+        <span class="material-icons-sharp">bar_chart</span>
+        <div class="middle">
+            <div class="left">
+                <h3>总订单量</h3>
+                <h1>12,345份</h1>
+            </div>
+            <div class="progress">
+                <svg>
+                    <circle cx="38" cy="38" r="36"></circle>
+                </svg>
+                <div class="number">
+                    <p>50%</p>
+                </div>
+            </div>
+        </div>
+        <small class="text-muted">最近24小时内</small>
+    </div>
+    <!-----------End Of Orders-------------------->
+    <div class="revenue">
+        <span class="material-icons-sharp">stacked_line_chart</span>
+        <div class="middle">
+            <div class="left">
+                <h3>总利润</h3>
+                <h1>￥1,460,000</h1>
+            </div>
+            <div class="progress">
+                <svg>
+                    <circle cx="38" cy="38" r="36"></circle>
+                </svg>
+                <div class="number">
+                    <p>34%</p>
+                </div>
+            </div>
+        </div>
+        <small class="text-muted">最近24小时内</small>
+    </div>
+    <!-----------End Of Revenue-------------------->
+</div>
+<!-----------------End Of Insights ----------------------->
+
+
+<div class="recent-orders">
+    <h2>最新订单信息</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>订单号</th>
+                <th>套餐组</th>
+                <th>订单日期</th>
+                <th>订单量</th>
+                <th>订单额</th>
+                <th>订单状态</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1231546</td>
+                <td>孕妇餐</td>
+                <td>02/01/2023</td>
+                <td>1</td>
+                <td>￥430</td>
+                <td class="success">已完成</td>
+                <td class="primary">详情</td>
+            </tr>
+            <tr>
+                <td>1231547</td>
+                <td>女皇餐</td>
+                <td>02/05/2023</td>
+                <td>1</td>
+                <td>￥750</td>
+                <td class="warning">进行中</td>
+                <td class="primary">详情</td>
+            </tr>
+            <tr>
+                <td>1231548</td>
+                <td>儿童餐</td>
+                <td>02/11/2023</td>
+                <td>1</td>
+                <td>￥560</td>
+                <td class="danger">未完成</td>
+                <td class="primary">详情</td>
+            </tr>
+            <tr>
+                <td>1231549</td>
+                <td>孕妇餐</td>
+                <td>01/01/2023</td>
+                <td>1</td>
+                <td>￥430</td>
+                <td class="success">已完成</td>
+                <td class="primary">详情</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="#">Show All</a>
+</div>
+{% endblock %}
+
+{% set page = 'dashboard' %}
