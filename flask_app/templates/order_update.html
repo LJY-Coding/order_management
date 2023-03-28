@@ -1,0 +1,81 @@
+<!-- orders.html -->
+{% extends 'index.html' %}
+
+{% block title %}Orders{% endblock %}
+
+{% block content %}
+<h1>Orders</h1>
+<div class="info-edit">
+    <h2>Order Info</h2>
+    <form class="row g-3" action="/orders/update/{{order.id}}" method="post">
+        {% with messages = get_flashed_messages(category_filter=["order_info"]) %}
+            {% if messages %}
+            <ul class="alert-message block-message error">
+                {% for message in messages %}
+                <li class="{{category}} text-danger">{{message}}</li>  
+                {% endfor %}
+            </ul>
+            {% endif %}
+        {% endwith %}
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Order Date</label>
+            <input type="date" class="form-control" name="order_date" value="{{order.order_date}}">
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Order Source</label>
+            <select class="form-select" name="order_source">
+                {% for source in ss_list.source_list %}
+                    {% if source == order.order_source %}
+                        <option value="{{order.order_source}}" selected>{{order.order_source}}</option>
+                    {% else %}
+                        <option value="{{source}}">{{source}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Status</label>
+            <select class="form-select" name="status">
+                {% for status in ss_list.status_list %}
+                    {% if status == order.status %}
+                        <option value="{{status}}" selected>{{status}}</option>
+                    {% else %}
+                        <option value="{{status}}">{{status}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Customer</label>
+            <select class="form-select" name="customer_id">
+                {% for customer in customers %}
+                    {% if customer.id == order.customer_id %}
+                    <option value="{{customer.id}}" selected>{{customer.first_name}} {{customer.last_name}}</option>
+                    {% else %}
+                    <option value="{{customer.id}}">{{customer.first_name}} {{customer.last_name}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Meal</label>
+            <select class="form-select" name="meal_id">
+                {% for meal in meals %}
+                <option value="{{meal.id}}">{{meal.meal_name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Quantity</label>
+            <input type="number" class="form-control" name="quantity" value="{{order.quantity}}">
+        </div>
+
+        <div class="row g-3 mt-4">
+            <button type="submit" class="btn btn-secondary col-2">Update Order</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% set page = 'orders' %}

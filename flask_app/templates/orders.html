@@ -1,11 +1,62 @@
 <!-- orders.html -->
 {% extends 'index.html' %}
 
-{% block title %}订单管理{% endblock %}
+{% block title %}Orders{% endblock %}
 
 {% block content %}
-<h1>订单管理</h1>
-<p>We are a small team of developers working on this app.</p>
+<h1>Orders</h1>
+<div id="add">
+    <a href="/orders/new" class="add-new">
+        <span class="material-icons-sharp">add</span>
+        <h3>Add New Order</h3>
+    </a>
+</div>
+<div class="table">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Contact</th>
+                <th>Address</th>
+                <th>Meal Group</th>
+                <th>Meal Name</th>
+                <th>Order Date</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Order Status</th>
+                <th>Order Source</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{order.id}}</td>
+                <td>{{order.customer.first_name}} {{order.customer.last_name}}</td>
+                <td>{{order.customer.contact}}</td>
+                <td>{{order.customer.address}}</td>
+                <td>{{order.meal.meal_group}}</td>
+                <td>{{order.meal.meal_name}}</td>
+                <td>{{order.order_date}}</td>
+                <td>{{order.quantity}}</td>
+                <td>${{order.total_price}}</td>
+                {% if order.status == "Open" %}
+                <td><b class="text-warning">{{order.status}}</b></td>
+                {% else %}
+                <td><b class="text-success">{{order.status}}</b></td>
+                {% endif %}
+                <td>{{order.order_source}}</td>
+                <td class="text-primary">
+                    <a href="/orders/edit/{{order.id}}" class="d-inline">Edit |</a>
+                    <a href="/orders/delete/{{order.id}}" class="d-inline">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+</div>
 {% endblock %}
 
 {% set page = 'orders' %}

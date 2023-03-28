@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/scripts.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Sharp" rel="stylesheet">
-    <!-- Bootstrap style sheet -->
     <link rel="stylesheet" href="/style.css">
-    <title>初光订单管理</title>
+    <title>Foodie</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container-box">
         <aside>
             <!-- Logo -->
             <div class="top">
@@ -28,27 +28,23 @@
             <div class="sidebar">
                 <a href="{{ url_for('dashboard') }}" class="{% if page == 'dashboard' %}active{% endif %}">
                     <span class="material-icons-sharp">dashboard</span>
-                    <h3>仪表盘</h3>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="{{ url_for('food_menu') }}" class="{% if page == 'food_menu' %}active{% endif %}">
+                    <span class="material-icons-sharp">feed</span>
+                    <h3>Food Menu</h3>
                 </a>
                 <a href="{{ url_for('customers') }}" class="{% if page == 'customers' %}active{% endif %}">
                     <span class="material-icons-sharp">group</span>
-                    <h3>客户管理</h3>
+                    <h3>Customers</h3>
                 </a>
                 <a href="{{ url_for('orders') }}" class="{% if page == 'orders' %}active{% endif %}">
                     <span class="material-icons-sharp">receipt_long</span>
-                    <h3>订单管理</h3>
+                    <h3>Orders</h3>
                 </a>
-                <a href="{{ url_for('forms') }}" class="{% if page == 'forms' %}active{% endif %}">
-                    <span class="material-icons-sharp">feed</span>
-                    <h3>表单管理</h3>
-                </a>
-                <a href="{{ url_for('analytics') }}" class="{% if page == 'analytics' %}active{% endif %}">
-                    <span class="material-icons-sharp">insights</span>
-                    <h3>数据分析</h3>
-                </a>
-                <a href="#">
+                <a href="{{ url_for('logout') }}">
                     <span class="material-icons-sharp">logout</span>
-                    <h3>账户登出</h3>
+                    <h3>Logout</h3>
                 </a>
             </div>
         </aside>
@@ -75,65 +71,55 @@
                 </div>
                 <div class="profile">
                     <div class="info">
-                        <p>Hey, <b>Jacob</b></p>
-                        <small class="text-muted">Admin</small>
-                    </div>
-                    <div class="profile-photo">
-                        <img src="/img/profile-1.jpg">
+                        <p>Hey, <b>{{user.user_name}}</b></p>
                     </div>
                 </div>
             </div>
             <!-- ---End Of Top --- -->
             
             <div class="recent-updates">
-                <h2>最近更新</h2>
+                <h2>Recent Updates</h2>
                 <div class="updates">
+                    {% for order in recent_orders%}
                     <div class="update">
                         <div class="profile-photo">
                             <img src="/img/profile-2.jpg" alt="">
                         </div>
-                        <!-- Python 修改 -->
+
                         <div class="message">
-                            <p><b>Tony</b> 录入一份孕妇餐</p> 
-                            <small class="text-muted">2分钟前</small>
+                            <p><b>{{order.user.user_name}}</b> entered an {{order.meal.meal_group}}</p>
+                            {% if order.duration.hours != 0 %}
+                            <small class="text-muted">{{order.duration.hours}} hrs ago</small>
+                            {% elif order.duration.minutes != 0 %}
+                            <small class="text-muted">{{order.duration.minutes}} mins ago</small>
+                            {% else %}
+                            <small class="text-muted">{{order.duration.seconds}} seconds ago</small>
+                            {% endif %}
                         </div>
                     </div>
-                    <div class="update">
-                        <div class="profile-photo">
-                            <img src="/img/profile-1.jpg" alt="">
-                        </div>
-                        <!-- Python 修改 -->
-                        <div class="message">
-                            <p><b>Jacob</b> 录入一份女皇餐</p> 
-                            <small class="text-muted">10分钟前</small>
-                        </div>
-                    </div>
-                    <div class="update">
-                        <div class="profile-photo">
-                            <img src="/img/profile-2.jpg" alt="">
-                        </div>
-                        <!-- Python 修改 -->
-                        <div class="message">
-                            <p><b>Tony</b> 录入一份儿童餐</p> 
-                            <small class="text-muted">1小时前</small>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
             <!------------------ End Of Recent Updates  ---------------------->
             <div class="sales-analytics">
-                <h2>销售分析</h2>
+                <h2>Sales Analytics</h2>
                 <div class="item online">
                     <div class="icon">
                         <span class="material-icons-sharp">shopping_cart</span>
                     </div>
                     <div class="right">
                         <div class="info">
-                            <h3>线上订单</h3>
-                            <small class="text-muted">最近24小时内</small>
+                            <h3>Online Orders</h3>
+                            <small class="text-muted">Recent 24 hrs</small>
                         </div>
-                        <h5 class="success">+39%</h5>
-                        <h3>3849</h3>
+                        {% if sales_analysis.online_per > 0 %}
+                        <h5 class="text-success">+{{sales_analysis.online_per}}%</h5>
+                        {% elif sales_analysis.online_per < 0 %}
+                        <h5 class="text-danger">{{sales_analysis.online_per}}%</h5>
+                        {% else %}
+                        <h5 class="text-warning">{{sales_analysis.online_per}}%</h5>
+                        {% endif %}
+                        <h3>{{sales_analysis.online}}</h3>
                     </div>
                 </div>
                 <div class="item offline">
@@ -142,11 +128,17 @@
                     </div>
                     <div class="right">
                         <div class="info">
-                            <h3>线下订单</h3>
-                            <small class="text-muted">最近24小时内</small>
+                            <h3>In Store Orders</h3>
+                            <small class="text-muted">Recent 24 hrs</small>
                         </div>
-                        <h5 class="danger">-5%</h5>
-                        <h3>1200</h3>
+                        {% if sales_analysis.instore_per > 0 %}
+                        <h5 class="text-success">+{{sales_analysis.instore_per}}%</h5>
+                        {% elif sales_analysis.instore_per < 0 %}
+                        <h5 class="text-danger">{{sales_analysis.instore_per}}%</h5>
+                        {% else %}
+                        <h5 class="text-warning">{{sales_analysis.instore_per}}%</h5>
+                        {% endif %}
+                        <h3>{{sales_analysis.instore}}</h3>
                     </div>
                 </div>
                 <div class="item customers">
@@ -155,18 +147,24 @@
                     </div>
                     <div class="right">
                         <div class="info">
-                            <h3>新增客户</h3>
-                            <small class="text-muted">最近24小时内</small>
+                            <h3>New Customers</h3>
+                            <small class="text-muted">Recent 24 hrs</small>
                         </div>
-                        <h5 class="success">+12%</h5>
-                        <h3>946</h3>
+                        {% if sales_analysis.new_cust_per > 0 %}
+                        <h5 class="text-success">+{{sales_analysis.new_cust_per}}%</h5>
+                        {% elif sales_analysis.new_cust_per < 0 %}
+                        <h5 class="text-danger">{{sales_analysis.new_cust_per}}%</h5>
+                        {% else %}
+                        <h5 class="text-warning">{{sales_analysis.new_cust_per}}%</h5>
+                        {% endif %}
+                        <h3>{{sales_analysis.new_customer}}</h3>
                     </div>
                 </div>
-                <div class="item add-product">
-                    <div>
+                <div class="add">
+                    <a href="/orders/new" class="add-new">
                         <span class="material-icons-sharp">add</span>
-                        <h3>添加订单</h3>
-                    </div>
+                        <h3>Add New Order</h3>
+                    </a>
                 </div>
             </div>
         </div>

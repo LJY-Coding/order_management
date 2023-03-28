@@ -4,8 +4,56 @@
 {% block title %}Customers{% endblock %}
 
 {% block content %}
-<h1>客户管理</h1>
-<p>We are a small team of developers working on this app.</p>
+<h1>Customers</h1>
+
+<div id="add">
+    <a href="/customers/new" class="add-new">
+        <span class="material-icons-sharp">add</span>
+        <h3>Add Customer</h3>
+    </a>
+</div>
+
+<div class="table">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Address</th>
+                <th>Status</th>
+                <th>Orders</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+            <tr>
+                <td>{{customer.first_name}} {{customer.last_name}}</td>
+                <td>{{customer.contact}}</td>
+                <td>{{customer.address}}, {{customer.city}}, {{customer.state}}, {{customer.zip}}</td>
+                {% if customer.status == 0 %}
+                <td><b class="text-success">New Customer</b></td>
+                {% else %}
+                <td><b class="text-primary">Regular Customer</b></td>
+                {% endif %}
+                <td>
+                    {% for order in order_counts %}
+                        {% if order.customer_id == customer.id %}
+                        {{order.orders}}
+                        {% else %}
+                        
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td class="text-primary">
+                    <a href="/customers/edit/{{customer.id}}" class="d-inline">Edit |</a>
+                    <a href="/customers/delete/{{customer.id}}" class="d-inline">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
 
 {% set page = 'customers' %}

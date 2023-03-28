@@ -1,0 +1,75 @@
+<!-- food_menu.html -->
+{% extends 'index.html' %}
+
+{% block title %}Food Menu{% endblock %}
+
+{% block content %}
+<h1>Food Menu</h1>
+<div class="info-edit">
+    <h2>Meal Info</h2>
+    <form class="col-12 mx-auto p-3" action="/meals/update/{{meal.id}}" method="post">
+        {% with messages = get_flashed_messages(category_filter=["meal_info"]) %}
+            {% if messages %}
+            <ul class="alert-message block-message error">
+                {% for message in messages %}
+                <li class="{{category}} text-danger">{{message}}</li>  
+                {% endfor %}
+            </ul>
+            {% endif %}
+        {% endwith %}
+        <div class="row g-3 align-items-center mb-4">
+            <div class="col-1">
+                <label class="col-form-label">Meal Group</label>
+            </div>
+            <div class="col-3">
+                <select class="form-select" name="meal_group">
+                    {% for menu in menu_list%}
+                        {% if menu == meal.meal_group%}
+                            <option selected value="{{menu}}">{{menu}}</option>
+                        {% else %}
+                            <option value="{{menu}}">{{menu}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="row g-3 align-items-center mb-4">
+            <div class="col-1">
+                <label class="col-form-label">Meal Name</label>
+            </div>
+            <div class="col-5">
+                <input type="text" class="form-control" name="meal_name" value="{{meal.meal_name}}">
+            </div>
+        </div>
+        
+        <div class="row g-3 align-items-center mb-4">
+            <div class="col-1">
+                <label class="col-form-label">Unit Price</label>
+            </div>
+            <div class="col-2">
+                <div class=" input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="text" class="form-control" name="unit_price" value="{{meal.unit_price}}">
+                </div>
+            </div>
+
+            <div class="col-1">
+                <label class="col-form-label">Cost</label>
+            </div>
+            <div class="col-2">
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="text" class="form-control" name="cost" value="{{meal.cost}}">
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-3 mt-4">
+            <button type="submit" class="btn btn-secondary col-2">Update Meal</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% set page = 'food_menu' %}

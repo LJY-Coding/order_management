@@ -1,0 +1,45 @@
+<!-- food_menu.html -->
+{% extends 'index.html' %}
+
+{% block title %}Food Menu{% endblock %}
+
+{% block content %}
+<h1>Food Menu</h1>
+<div id="add">
+    <a href="/meals/new" class="add-new">
+        <span class="material-icons-sharp">add</span>
+        <h3>Add Meal</h3>
+    </a>
+</div>
+
+<div class="table">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Meal Group</th>
+                <th>Meal</th>
+                <th>Unit Price</th>
+                <th>Cost</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for meal in meals %}
+            <tr>
+                <td>{{meal.meal_group}}</td>
+                <td>{{meal.meal_name}}</td>
+                <td>${{meal.unit_price}}</td>
+                <td>${{meal.cost}}</td>
+                <td class="text-primary">
+                    <a href="/meals/edit/{{meal.id}}" class="d-inline">Edit |</a>
+                    <a href="/meals/delete/{{meal.id}}" class="d-inline">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% set page = 'food_menu' %}

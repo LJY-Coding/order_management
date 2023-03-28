@@ -1,0 +1,67 @@
+<!-- customers.html -->
+{% extends 'index.html' %}
+
+{% block title %}Customers{% endblock %}
+
+{% block content %}
+<h1>Customers</h1>
+<div class="info-edit">
+    <h2>Customer Info</h2>
+    <form class="row g-3" action="/customers/update/{{customer.id}}" method="post">
+        {% with messages = get_flashed_messages(category_filter=["customer_info"]) %}
+            {% if messages %}
+            <ul class="alert-message block-message error">
+                {% for message in messages %}
+                <li class="{{category}} text-danger">{{message}}</li>  
+                {% endfor %}
+            </ul>
+            {% endif %}
+        {% endwith %}
+        <div class="col-md-6 mb-3">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-control" name="first_name" value="{{customer.first_name}}">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-control" name="last_name" value="{{customer.last_name}}">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" name="email" value="{{customer.email}}">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Contact</label>
+            <input type="text" class="form-control" name="contact" value="{{customer.contact}}">
+        </div>
+        <div class="col-12 mb-3">
+            <label class="form-label">Address</label>
+            <input type="text" class="form-control" name="address" value="{{customer.address}}">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">City</label>
+            <input type="text" class="form-control" name="city" value="{{customer.city}}">
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="form-label">State</label>
+            <select class="form-select" name="state">
+                {% for state in state_list%}
+                    {% if state == customer.state %}
+                        <option selected value="{{state}}">{{state}}</option>
+                    {% else %}
+                        <option value="{{state}}">{{state}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-2 mb-3">
+            <label class="form-label">Zip</label>
+            <input type="text" class="form-control" name="zip" value="{{customer.zip}}">
+        </div>
+        <div class="row g-3 mt-4">
+            <button type="submit" class="btn btn-secondary col-2">Update Customer</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% set page = 'customers' %}

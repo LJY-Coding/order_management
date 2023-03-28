@@ -1,0 +1,68 @@
+<!-- orders.html -->
+{% extends 'index.html' %}
+
+{% block title %}Orders{% endblock %}
+
+{% block content %}
+<h1>Orders</h1>
+<div class="info-edit">
+    <h2>Order Info</h2>
+    <form class="row g-3" action="/orders/add" method="post">
+        {% with messages = get_flashed_messages(category_filter=["order_info"]) %}
+            {% if messages %}
+            <ul class="alert-message block-message error">
+                {% for message in messages %}
+                <li class="{{category}} text-danger">{{message}}</li>  
+                {% endfor %}
+            </ul>
+            {% endif %}
+        {% endwith %}
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Order Date</label>
+            <input type="date" class="form-control" name="order_date">
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Order Source</label>
+            <select class="form-select" name="order_source">
+                <option selected>Choose...</option>
+                <option value="Online">Online</option>
+                <option value="In Store">In Store</option>
+            </select>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Status</label>
+            <input type="hidden" class="form-control" name="status" value="Open">
+            <p class="text-warning">Open</p>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Customer</label>
+            <select class="form-select" name="customer_id">
+                <option selected>Choose...</option>
+                {% for customer in customers %}
+                <option value="{{customer.id}}">{{customer.first_name}} {{customer.last_name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Meal</label>
+            <select class="form-select" name="meal_id">
+                {% for meal in meals %}
+                <option value="{{meal.id}}">{{meal.meal_name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Quantity</label>
+            <input type="number" class="form-control" name="quantity">
+        </div>
+
+        <div class="row g-3 mt-4">
+            <button type="submit" class="btn btn-secondary col-2">Add Order</button>
+        </div>
+
+    </form>
+</div>
+{% endblock %}
+
+{% set page = 'orders' %}
